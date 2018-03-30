@@ -17,14 +17,15 @@ The threads use the counter to add and subtract values.
 
 | Counter class           | Limit              | Runtime (sec)   |
 |:------------------------|:-------------------|-----------------|
-| Unsynchronized counter  |                    |                 |
-| Using ReentrantLock     |                    |                 |
-| Syncronized method      |                    |                 |
-| AtomicLong for total    |                    |                 |
+| Unsynchronized counter  | 10000000           | 0.011338        |
+| Using ReentrantLock     | 10000000           | 0.888428        |
+| Synchronized method     | 10000000           | 0.791209        |
+| AtomicLong for total    | 10000000           | 0.245051        |
 
 ## 1. Using unsynchronized counter object
 
-answer the questions (1.1 - 1.3)
+Unfortunately, the total isn't zero, the value varies between negative and positive integer.
+Because sometimes these threads are calling the Counter class at the same time and return value of each methods at a different rate, so that the total value wouldn't be zero. 
 
 ## 2. Implications for Multi-threaded Applications
 
@@ -32,11 +33,12 @@ How might this affect real applications?
 
 ## 3. Counter with ReentrantLock
 
-answer questions 3.1 - 3.4
+The total is always zero. The results are different from problem 1 because it never calls the Counter class at the same time. For instance, if thread1 is computing thread2 need to wait for thread1 to finish first then the lock will unlock itself then thread2 can calls the Counter class.   
 
 ## 4. Counter with synchronized method
 
-answer question 4
+The total is zero. The result is different from problem 1 because it runs only one thread at a time, so that the total counter is compute from each of the threads which will eventually negate each others.
+Synchronized means cause or occur at the same rate and time.
 
 ## 5. Counter with AtomicLong
 

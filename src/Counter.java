@@ -2,6 +2,7 @@
  * An accumulator for a sum.
  */
 public class Counter {
+	
 	protected long total;
 	
 	public Counter() {
@@ -12,6 +13,8 @@ public class Counter {
 	 * Add an amount to the total.
 	 */
 	public void add(int amount) { total += amount; }
+	
+	public void subtract(int amount) { total -= amount; }
 	
 	/**
 	 * Get the total value of counter.
